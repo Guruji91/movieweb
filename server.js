@@ -12,6 +12,11 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
+// es module fix
+const __filename = fileURLToPath(import.meta.url)
+
+const __dirname = path.dirname(__filename)
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,10 +25,7 @@ app.use(express.static(path.join(__dirname, './client/build')))
 // connect DB
 connectDB();
 
-// es module fix
-const __filename = fileURLToPath(import.meta.url)
 
-const __dirname = path.dirname(__filename)
 
 // Main route
 // app.get("/", (req, res) => {
@@ -46,5 +48,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running in  http://localhost/${PORT}`);
+  console.log(`Server running is ${process.env.PORT} ${PORT}`);
 });
