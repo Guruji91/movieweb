@@ -12,6 +12,9 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
+// connect DB
+connectDB();
+
 // es module fix
 const __filename = fileURLToPath(import.meta.url)
 
@@ -22,9 +25,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './client/build')))
 
-// connect DB
-connectDB();
 
+// other routes
+app.use("/api/users", userRouter);
+app.use("/api/movies", moviesRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/upload", Uploadrouter);
+
+// error handling middleware
+app.use(errorHandler);
 
 
 // Main route
@@ -36,14 +45,7 @@ app.get("*", function(req, res)  {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// other routes
-app.use("/api/users", userRouter);
-app.use("/api/movies", moviesRouter);
-app.use("/api/categories", categoriesRouter);
-app.use("/api/upload", Uploadrouter);
 
-// error handling middleware
-app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
