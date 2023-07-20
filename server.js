@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import  connectDB  from "./config/db.js";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 import userRouter from "./Routes/UserRouter.js";
@@ -10,7 +10,7 @@ import Uploadrouter from "./Controllers/UploadFile.js";
 import path from "path"
 import { fileURLToPath } from "url";
 
-// dotenv.config();
+dotenv.config();
 
 // connect DB
 connectDB();
